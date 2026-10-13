@@ -1,0 +1,30 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net48</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <RootNamespace>BusinessRuleExporter</RootNamespace>
+    <AssemblyName>BusinessRuleExporter</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <!-- Assembly metadata and version live in Properties/AssemblyInfo.cs (single source of truth). -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!--
+      Development-time references only. XrmToolBox already ships these assemblies, so they must
+      not be copied next to the plugin (ExcludeAssets=runtime) and must not flow to other projects.
+      Versions are the ones this project was built and verified with; keep them aligned with the
+      XrmToolBox version declared as the dependency in packaging/BusinessRuleExporter.nuspec.
+    -->
+    <PackageReference Include="MscrmTools.Xrm.Connection" Version="1.2025.9.64" PrivateAssets="all" ExcludeAssets="runtime" />
+    <PackageReference Include="XrmToolBoxPackage" Version="1.2025.10.74" PrivateAssets="all" ExcludeAssets="runtime" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
+  </ItemGroup>
+</Project>

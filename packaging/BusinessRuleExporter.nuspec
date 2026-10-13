@@ -1,0 +1,39 @@
+
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>GagandeepSingh.BusinessRuleExporter</id>
+    <version>1.0.0.0</version>
+    <title>Business Rule Exporter</title>
+    <authors>Gagan Deep Singh</authors>
+    <owners>Gagan Deep Singh</owners>
+
+    <projectUrl>https://github.com/theGlowOfSky/BusinessRuleExporter</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/theGlowOfSky/BusinessRuleExporter/main/assets/icon-128.png</iconUrl>
+    <icon>icon.png</icon>
+    <readme>README.md</readme>
+
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+
+    <description>A custom XrmToolBox utility for retrieving Microsoft Dataverse business rules, interpreting available client-side logic, and exporting rule details to Excel.</description>
+    <summary>A custom XrmToolBox utility for retrieving Dataverse business rules and exporting interpreted logic to Excel.</summary>
+
+    <releaseNotes>1.0.0.0: Initial release. Retrieves Dataverse business rules, interprets available client-side logic into readable IF/THEN/ELSE text, maps variables to Dataverse logical names, and exports results to Excel.</releaseNotes>
+
+    <copyright>Copyright © 2026 Gagandeep Singh</copyright>
+    <tags>XrmToolBox Dataverse BusinessRules PowerPlatform Dynamics365 Excel</tags>
+
+    <dependencies>
+      <dependency id="XrmToolBox" version="1.2025.10.74" />
+    </dependencies>
+  </metadata>
+
+  <files>
+    <file src="BusinessRuleExporter\bin\Release\BusinessRuleExporter.dll"
+          target="lib\net48\Plugins" />
+    <file src="assets\icon-128.png"
+          target="icon.png" />
+    <file src="packaging\NUGET_README.md"
+          target="README.md" />
+  </files>
+</package>
