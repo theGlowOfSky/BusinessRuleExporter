@@ -1,0 +1,58 @@
+# Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Build output
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+publish/
+artifacts/
+
+# NuGet
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+project.lock.json
+# (SDK-style projects restore from the .csproj; obj/ is regenerated)
+
+# Tests / coverage
+TestResults/
+*.trx
+coverage*/
+*.coverage
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+~$*
+Thumbs.db
+.DS_Store
+
+# Secrets and local configuration
+*.pfx
+*.snk
+*.pem
+*.key
+.env
+.env.*
+appsettings.*.json
+*.publishsettings
+nuget.local.config
+**/nuget-api-key*
+
+# Customer data: never commit exports or connection files
+*.xlsx
+*.xls
+*.csv
+ConnectionsList.xml
+*.zip
+!assets/**
