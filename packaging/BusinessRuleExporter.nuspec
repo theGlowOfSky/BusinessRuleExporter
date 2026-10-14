@@ -7,8 +7,8 @@
     <authors>Gagan Deep Singh</authors>
     <owners>Gagan Deep Singh</owners>
 
-    <projectUrl>https://github.com/theGlowOfSky/BusinessRuleExporter-Public</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/theGlowOfSky/BusinessRuleExporter-Public/main/assets/icon-128.png</iconUrl>
+    <projectUrl>https://github.com/theGlowOfSky/BusinessRuleExporter</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/theGlowOfSky/BusinessRuleExporter/main/assets/icon-128.png</iconUrl>
     <icon>icon.png</icon>
     <readme>README.md</readme>
 
@@ -17,7 +17,7 @@
     <description>A custom XrmToolBox utility for retrieving Microsoft Dataverse business rules, interpreting available client-side logic, and exporting rule details to Excel.</description>
     <summary>A custom XrmToolBox utility for retrieving Dataverse business rules and exporting interpreted logic to Excel.</summary>
 
-    <releaseNotes>1.0.1: Updates public project and icon URLs for XrmToolBox registration.</releaseNotes>
+    <releaseNotes>1.0.1: Updates public project and package metadata URLs.</releaseNotes>
 
     <copyright>Copyright © 2026 Gagan Deep Singh</copyright>
     <tags>XrmToolBox Dataverse BusinessRules PowerPlatform Dynamics365 Excel</tags>
