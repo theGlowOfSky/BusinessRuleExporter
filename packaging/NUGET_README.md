@@ -16,4 +16,4 @@ Open XrmToolBox, go to **Tool Library**, search for **Business Rule Exporter**, 
 
 Option-set values are shown as integers because labels are not stored on the business rule record. Logic interpretation is best effort; review complex rules in the Power Apps designer.
 
-Author: Gagandeep Singh
+Author: Gagan Deep Singh
