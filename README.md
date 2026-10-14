@@ -1,5 +1,4 @@
-# BusinessRuleExporter-Source (private)
-
+# BusinessRuleExporter-Source
 Source code for **Business Rule Exporter**, an XrmToolBox tool by Gagandeep Singh that retrieves Dataverse business rules (`workflow` where `category = 2` and `type = 1`), interprets the JavaScript in `clientdata` into readable logic, and exports the result to Excel.
 
 > Keep this repository **private**. The public showcase lives in the separate `BusinessRuleExporter` repository and contains documentation only.
