@@ -75,55 +75,6 @@ Both packages are configured with `PrivateAssets=all` and `ExcludeAssets=runtime
 
 The published NuGet package declares its XrmToolBox dependency through `packaging/BusinessRuleExporter.nuspec`. The plugin does not require additional third-party runtime libraries, according to the current project configuration.
 
-## Build and Test
-
-Prerequisites:
-
-- Windows development environment.
-- Visual Studio with .NET desktop development tools.
-- .NET Framework 4.8 targeting pack.
-- NuGet package restore access.
-
-### Build
-
-1. Open `BusinessRuleExporter.sln` in Visual Studio.
-2. Restore the NuGet dependencies.
-3. Select the `Release` configuration.
-4. Build the solution.
-5. Review the build output for errors and warnings.
-
-### Run Tests
-
-Run the unit tests in `BusinessRuleExporter.Tests` using Visual Studio Test Explorer or the command line:
-
-```powershell
-dotnet test BusinessRuleExporter.sln --configuration Release
-```
-
-See [docs/BUILD_AND_TEST.md](docs/BUILD_AND_TEST.md) for the repository's detailed build and test instructions.
-
-## Packaging and Release
-
-The repository includes a NuGet specification and PowerShell packaging script.
-
-Before creating a release:
-
-1. Build and test the solution in Release configuration.
-2. Verify the plugin assembly and required assets.
-3. Review `packaging/BusinessRuleExporter.nuspec` for package metadata and dependency declarations.
-4. Generate the NuGet package using the documented packaging workflow.
-5. Inspect the generated `.nupkg` contents and validate the package version.
-6. Follow [docs/RELEASE_RUNBOOK.md](docs/RELEASE_RUNBOOK.md) for publishing and release verification.
-
-Do not overwrite or republish an existing package version. Increment the package version for each new release.
-
-## Security and Data Handling
-
-- Never commit exported `.xlsx` or `.csv` files containing real business data.
-- Never commit connection profiles, credentials, API keys, access tokens, or other secrets.
-- Use synthetic or sanitized business rule definitions in tests and examples.
-- Review generated exports before sharing them, as they may contain internal entity names, field names, or business logic.
-- Keep credentials and environment-specific configuration outside source control.
 
 ## Limitations
 
