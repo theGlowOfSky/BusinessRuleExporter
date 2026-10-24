@@ -4,8 +4,8 @@ Run these steps yourself with your own authenticated accounts. Never paste keys 
 
 ## 0. Preconditions
 1. Replace `YOUR_GITHUB_USERNAME` in `packaging/BusinessRuleExporter.nuspec`.
-2. Confirm `AssemblyVersion`/`AssemblyFileVersion` in `Properties/AssemblyInfo.cs` equal `<version>` in the nuspec.
-3. Complete the manual checklist in `docs/BUILD_AND_TEST.md`.
+2. Confirm all three assembly version attributes in `Properties/AssemblyInfo.cs` are `1.2026.10.3` and the nuspec package version is `1.2026.10.3`. The version format is `Major.Year.Month.ReleaseNumberInMonth`; this is release 3 for October 2026. The packaging script compares the complete four-part versions.
+3. Complete the manual checklist in `docs/BUILD_AND_TEST.md`, including verifying the single-screen layout: a scrollable table selector on the left, business-rule preview on the right, and no Previous/Next navigation buttons.
 4. Check the ID is free: open `https://www.nuget.org/packages/GagandeepSingh.BusinessRuleExporter` — it must return "not found".
 5. Confirm `<minimum XrmToolBox version>` (nuspec dependency `XrmToolBox` 1.2025.10.74) exists at `https://www.nuget.org/packages/XrmToolBox`.
 
@@ -13,7 +13,7 @@ Run these steps yourself with your own authenticated accounts. Never paste keys 
 ```powershell
 powershell -ExecutionPolicy Bypass -File packaging\pack.ps1
 ```
-Open `artifacts\GagandeepSingh.BusinessRuleExporter.1.0.0.nupkg` in NuGet Package Explorer. Expected contents: `lib/net48/Plugins/BusinessRuleExporter.dll`, `icon.png`, `README.md`, and a single dependency on `XrmToolBox`. No `.cs`, `.pdb`, or host DLLs. NuGet normalizes `1.0.0.0` to `1.0.0`.
+Open `artifacts\GagandeepSingh.BusinessRuleExporter.1.2026.10.3.nupkg` in NuGet Package Explorer. Expected contents: `lib/net48/Plugins/BusinessRuleExporter.dll`, `icon.png`, `README.md`, and a single dependency on `XrmToolBox`. No `.cs`, `.pdb`, or host DLLs. The assembly version and NuGet package version should both be `1.2026.10.3`.
 
 ## 2. NuGet.org account and API key
 1. Sign in at https://www.nuget.org with your Microsoft account (or create one), verify the e-mail.
@@ -25,7 +25,7 @@ $env:NUGET_API_KEY = Read-Host "NuGet API key"   # typed locally, never shared
 
 ## 3. Publish (after final review)
 ```powershell
-dotnet nuget push artifacts\GagandeepSingh.BusinessRuleExporter.1.0.0.nupkg --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
+dotnet nuget push artifacts\GagandeepSingh.BusinessRuleExporter.1.2026.10.3.nupkg --api-key $env:NUGET_API_KEY --source https://api.nuget.org/v3/index.json
 Remove-Item Env:NUGET_API_KEY
 ```
 
@@ -39,14 +39,14 @@ Remove-Item Env:NUGET_API_KEY
 3. Submit. An administrator reviews it (can take days). Do not announce it as listed until it appears in the Tool Library.
 
 ## 6. Updating later
-Bump the version in `AssemblyInfo.cs` (all three attributes), `CHANGELOG.md`, nuspec `<version>` and `<releaseNotes>` together, repeat steps 1, 3, 4. A published version number can never be reused; unlist (not delete) bad versions.
+Bump the version in `AssemblyInfo.cs` (all three attributes), `CHANGELOG.md`, nuspec `<version>` and `<releaseNotes>` together, repeat steps 1, 3, 4. Keep the package README aligned with the current side-by-side interface. A published version number can never be reused; unlist (not delete) bad versions.
 
 ## 7. Git remotes
 ```bash
 # Private source (this folder)
 git init -b main
 git add . && git status          # review the file list before committing
-git commit -m "Initial commit: Business Rule Exporter 1.0.0.0"
+git commit -m "Release Business Rule Exporter 1.2026.10.3"
 git remote add origin https://github.com/YOUR_GITHUB_USERNAME/BusinessRuleExporter-Source.git
 git push -u origin main
 
