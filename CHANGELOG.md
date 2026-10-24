@@ -2,8 +2,6 @@
 
 All notable changes to this project are documented here. Versions follow the assembly/package version.
 
-## [Unreleased]
-
 ## [1.2026.10.3] - 2026-10-23
 
 ### Changed
