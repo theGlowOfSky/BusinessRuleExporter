@@ -14,14 +14,11 @@ namespace BusinessRuleExporter
     {
         private static readonly string[] Headers =
         {
+            "Table Logical Name",
             "Business Rule Name",
             "Business Rule ID",
-            "Table Logical Name",
             "State",
-            "Status Code",
-            "Scope",
             "Referenced Fields",
-            "Variable Mapping",
             "Business Rule Logic"
         };
 
@@ -56,7 +53,7 @@ namespace BusinessRuleExporter
             sheet.Append("<cols>");
             for (var c = 1; c <= Headers.Length; c++)
             {
-                var width = c == Headers.Length ? 90 : 28;
+                var width = c == 6 ? 90 : c == 5 ? 42 : c == 3 ? 38 : c == 2 ? 32 : c == 1 ? 28 : 14;
                 sheet.Append("<col min=\"").Append(c).Append("\" max=\"").Append(c).Append("\" width=\"").Append(width).Append("\" customWidth=\"1\"/>");
             }
 
@@ -68,13 +65,12 @@ namespace BusinessRuleExporter
                 var row = rows[r];
                 WriteRow(sheet, r + 2, new[]
                 {
-                    row.Name, row.Id, row.Table, row.State, row.StatusCode, row.Scope,
-                    row.ReferencedFields, row.VariableMapping, row.Logic
+                    row.Table, row.Name, row.Id, row.State, row.ReferencedFields, row.Logic
                 }, add, false);
             }
 
             sheet.Append("</sheetData>");
-            sheet.Append("<autoFilter ref=\"A1:I").Append(Math.Max(1, rows.Count + 1)).Append("\"/>");
+            sheet.Append("<autoFilter ref=\"A1:F").Append(Math.Max(1, rows.Count + 1)).Append("\"/>");
             sheet.Append("</worksheet>");
 
             var sharedXml = new StringBuilder();

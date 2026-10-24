@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using BusinessRuleExporter;
 using Xunit;
 
@@ -133,7 +134,18 @@ namespace BusinessRuleExporter.Tests
             {
                 var rows = new[]
                 {
-                    new BusinessRuleRow { Name = "Rule \u0001 <A> & B", Id = "00000000-0000-0000-0000-000000000001", Table = "new_sample", Logic = "IF\nTHEN" }
+                    new BusinessRuleRow
+                    {
+                        Table = "new_sample",
+                        Name = "Rule \u0001 <A> & B",
+                        Id = "00000000-0000-0000-0000-000000000001",
+                        State = "Activated",
+                        ReferencedFields = "new_field1, new_field2",
+                        Logic = "IF\nTHEN",
+                        StatusCode = "1",
+                        Scope = "2",
+                        VariableMapping = "{\"v1\": \"new_field1\"}"
+                    }
                 };
                 XlsxWriter.Write(path, rows);
 
@@ -146,6 +158,37 @@ namespace BusinessRuleExporter.Tests
                     string shared;
                     using (var reader = new StreamReader(sharedEntry.Open())) shared = reader.ReadToEnd();
                     Assert.DoesNotContain("\u0001", shared);
+                    var ns = (System.Xml.Linq.XNamespace)"http://schemas.openxmlformats.org/spreadsheetml/2006/main";
+                    var sharedValues = System.Xml.Linq.XDocument.Parse(shared).Root
+                        .Elements(ns + "si")
+                        .Select(item => (string)item.Element(ns + "t"))
+                        .ToList();
+                    Assert.Equal(new[]
+                    {
+                        "Table Logical Name", "Business Rule Name", "Business Rule ID",
+                        "State", "Referenced Fields", "Business Rule Logic"
+                    }, sharedValues.Take(6));
+                    Assert.DoesNotContain("Status Code", sharedValues);
+                    Assert.DoesNotContain("Scope", sharedValues);
+                    Assert.DoesNotContain("Variable Mapping", sharedValues);
+
+                    var sheetEntry = zip.GetEntry("xl/worksheets/sheet1.xml");
+                    Assert.NotNull(sheetEntry);
+                    using (var sheetStream = sheetEntry.Open())
+                    {
+                        var sheet = System.Xml.Linq.XDocument.Load(sheetStream);
+                        Assert.Equal("A1:F2", (string)sheet.Root.Element(ns + "autoFilter").Attribute("ref"));
+                        var dataRow = sheet.Root.Element(ns + "sheetData").Elements(ns + "row").Skip(1).First();
+                        var rowValues = dataRow.Elements(ns + "c")
+                            .Select(cell => sharedValues[int.Parse((string)cell.Element(ns + "v"))])
+                            .ToList();
+                        Assert.Equal(new[]
+                        {
+                            "new_sample", "Rule  <A> & B", "00000000-0000-0000-0000-000000000001",
+                            "Activated", "new_field1, new_field2", "IF\nTHEN"
+                        }, rowValues);
+                    }
+
                     // Every part must be well-formed XML.
                     foreach (var entry in zip.Entries)
                     {

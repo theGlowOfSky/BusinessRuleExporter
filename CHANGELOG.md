@@ -2,10 +2,34 @@
 
 All notable changes to this project are documented here. Versions follow the assembly/package version.
 
-## [1.0.0.0] - Unreleased
+## [Unreleased]
+
+## [1.2026.10.3] - 2026-10-23
+
+### Changed
+- Reordered the preview and Excel columns to: Table Logical Name, Business Rule Name, Business Rule ID, State, Referenced Fields, and Business Rule Logic.
+- Sorted business-rule results by Table Logical Name, then Business Rule Name, then State.
+- Removed Status Code, Scope, and Variable Mapping from the visible preview and Excel export.
+- Applied version format `Major.Year.Month.ReleaseNumberInMonth`; this is the third release in October 2026.
+
+## [1.0.2] - 2026-10-21
 
 ### Added
-- Plugin metadata: author Gagandeep Singh, original 32 px and 80 px tool icons, product description.
+- Single-screen audit workflow with a scrollable table-selection pane on the left (about 25%) and the business-rule preview on the right (about 75%).
+- Searchable table selection with Select All, Clear Selection, and a live selected-table count; the preview must be reloaded whenever the selection changes.
+- README and NuGet package guidance for the side-by-side workflow and maintainer LinkedIn link.
+
+### Changed
+- Tool-list background metadata is set to white with dark text.
+- Package metadata and assembly version updated to 1.0.2.
+
+## [1.0.1] - Package metadata correction
+- Corrected the NuGet package author metadata.
+
+## [1.0.0] - Initial implementation
+
+### Added
+- Plugin metadata: author Gagan Deep Singh, original 32 px and 80 px tool icons, product description.
 - `Properties/AssemblyInfo.cs` as the single source of assembly metadata and version.
 - Solution file, `.gitignore`, xUnit test project (interpreter, variable mapping, xlsx writer).
 - NuGet packaging files under `packaging/` (nuspec, package README, pack script).

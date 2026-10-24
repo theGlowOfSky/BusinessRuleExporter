@@ -23,9 +23,13 @@ if (-not (Test-Path $dll)) { throw "Missing $dll" }
 $extra = Get-ChildItem $out -File | Where-Object { $_.Extension -eq '.dll' -and $_.Name -ne 'BusinessRuleExporter.dll' }
 if ($extra) { Write-Warning ("Unexpected DLLs in output (host assemblies must not be shipped): " + ($extra.Name -join ', ')) }
 
-$asmVersion = [System.Reflection.AssemblyName]::GetAssemblyName($dll).Version.ToString()
-$specVersion = ([xml]$nuspecText).package.metadata.version
-if ($asmVersion -ne $specVersion) { throw "Assembly version $asmVersion does not match nuspec version $specVersion" }
+$asmVersion = [System.Reflection.AssemblyName]::GetAssemblyName($dll).Version
+$specVersion = [version](([xml]$nuspecText).package.metadata.version)
+$asmVersionNormalized = $asmVersion.ToString()
+$specVersionNormalized = $specVersion.ToString()
+if ($asmVersionNormalized -ne $specVersionNormalized) {
+    throw "Assembly version $asmVersionNormalized does not match nuspec version $specVersionNormalized"
+}
 
 New-Item -ItemType Directory -Force artifacts | Out-Null
 nuget pack $nuspec -BasePath $root -OutputDirectory artifacts

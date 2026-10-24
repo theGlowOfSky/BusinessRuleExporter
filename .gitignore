@@ -4,3 +4,8 @@
 **/obj/
 *.user
 *.suo
+
+# Local packaging outputs
+/artifacts/
+/nuget.exe
+*.broken.bak
