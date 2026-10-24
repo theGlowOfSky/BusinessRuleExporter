@@ -1,4 +1,3 @@
-
 name: Publish BusinessRuleExporter to NuGet
 
 on:
@@ -27,6 +26,10 @@ jobs:
         shell: pwsh
         run: dotnet build "BusinessRuleExporter/BusinessRuleExporter.csproj" -c Release
 
+      - name: Run tests
+        shell: pwsh
+        run: dotnet test "BusinessRuleExporter.Tests/BusinessRuleExporter.Tests.csproj" -c Release
+
       - name: Download NuGet CLI
         shell: pwsh
         run: Invoke-WebRequest "https://dist.nuget.org/win-x86-commandline/latest/nuget.exe" -OutFile "$env:RUNNER_TEMP/nuget.exe"
@@ -38,7 +41,7 @@ jobs:
           & "$env:RUNNER_TEMP/nuget.exe" pack "packaging/BusinessRuleExporter.nuspec" -BasePath "." -OutputDirectory "artifacts"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           Get-ChildItem -Path "artifacts" -Filter "*.nupkg" | Select-Object FullName, Length
-          $package = Get-ChildItem -Path "artifacts" -Filter "GagandeepSingh.BusinessRuleExporter.1.0.1.nupkg" | Select-Object -First 1
+          $package = Get-ChildItem -Path "artifacts" -Filter "GagandeepSingh.BusinessRuleExporter.1.2026.10.3.nupkg" | Select-Object -First 1
           if (-not $package) { throw "NuGet package was not found after packing." }
           "PACKAGE_PATH=$($package.FullName)" >> $env:GITHUB_ENV
 
